@@ -12,9 +12,19 @@ public class Main {
         float annualInterest = (float) readNumberInput("Annual interest rate (%): ", 0, 30);
         byte years = (byte) readNumberInput("Duration of mortgage (years): ", 1, 30);
 
-        double monthlyPayment = calculatePayment(principal, annualInterest, years);
+        float monthlyInterest = calculateMonthlyInterest(annualInterest);
+        short numberOfPayments = calculateNumberOfPayments(years);
+
+        double monthlyPayment = calculateMonthlyPayment(principal, monthlyInterest, numberOfPayments);
         String monthlyPaymentString = NumberFormat.getCurrencyInstance(Locale.UK).format(monthlyPayment);
         System.out.println("\nYour monthly payment will be " + monthlyPaymentString);
+
+        System.out.println("Balance after each payment:");
+        for (short i = 1; i <= numberOfPayments; i++) {
+            double balance = calculateBalance(principal, monthlyInterest, numberOfPayments, i);
+            String formattedBalance = NumberFormat.getCurrencyInstance(Locale.UK).format(balance);
+            System.out.println(String.format("%-5s", i + ".") + formattedBalance);
+        }
     }
 
     public static void displayTitle() {
@@ -34,13 +44,26 @@ public class Main {
         }
     }
 
-    public static double calculatePayment(int principal, float annualInterest, byte years) {
+    public static float calculateMonthlyInterest(float annualInterest) {
         final byte MONTHS_IN_YEAR = 12;
         final byte PERCENT = 100;
-        float monthlyInterest = annualInterest / MONTHS_IN_YEAR / PERCENT;
-        short numberOfPayments = (short) (years * MONTHS_IN_YEAR);
+        return annualInterest / MONTHS_IN_YEAR / PERCENT;
+    }
+
+    public static short calculateNumberOfPayments(byte years) {
+        final byte MONTHS_IN_YEAR = 12;
+        return (short) (years * MONTHS_IN_YEAR);
+    }
+
+    public static double calculateMonthlyPayment(int principal, float monthlyInterest, short numberOfPayments) {
         return principal
                 * monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments)
+                / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
+    }
+
+    public static double calculateBalance(int principal, float monthlyInterest, short numberOfPayments, short paymentCount) {
+        return principal
+                * (Math.pow(1 + monthlyInterest, numberOfPayments) - Math.pow(1 + monthlyInterest, paymentCount))
                 / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
     }
 }
