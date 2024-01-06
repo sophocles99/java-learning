@@ -1,4 +1,4 @@
-package classes;
+package classesIntro;
 
 public class Browser {
     public void navigate(String address) {

@@ -1,6 +1,4 @@
-package classes;
-
-import org.w3c.dom.ls.LSOutput;
+package classesIntro;
 
 public class Main {
     public static void main(String[] args) {

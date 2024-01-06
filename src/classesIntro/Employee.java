@@ -1,4 +1,4 @@
-package classes;
+package classesIntro;
 
 public class Employee {
     private int baseSalary;
