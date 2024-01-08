@@ -6,10 +6,8 @@ public class Main {
         float annualInterest = (float) Console.readNumber("Annual interest rate (%): ", 0, 30);
         byte years = (byte) Console.readNumber("Duration of mortgage (years): ", 1, 30);
 
-        Mortgage mortgage = new Mortgage(principal, annualInterest, years);
-
         Title.display();
-        mortgage.displayMonthlyPayment();
-        mortgage.displayPaymentSchedule();
+        MortgageReport.displayMonthlyPayment(principal, annualInterest, years);
+        MortgageReport.displayPaymentSchedule(principal, annualInterest, years);
     }
 }
