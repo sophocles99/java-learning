@@ -4,24 +4,29 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class MortgageReport {
-    final static byte MONTHS_IN_YEAR = 12;
+    private final MortgageCalculator calculator;
 
-    public static void displayMonthlyPayment(int principal, float annualInterest, byte years) {
-        double monthlyPayment = MortgageCalculator.calculateMonthlyPayment(principal, annualInterest, years);
+    public MortgageReport(MortgageCalculator calculator) {
+        this.calculator = calculator;
+    }
+
+    public void displayPaymentSchedule() {
+        System.out.println("Payment schedule");
+        System.out.println("----------------");
+        System.out.println("Month\tBalance");
+        for (short month = 1; month <= calculator.getYears() * Main.MONTHS_IN_YEAR; month++) {
+            double balance = calculator.calculateBalance(month);
+            String formattedBalance = NumberFormat.getCurrencyInstance(Locale.UK).format(balance);
+            System.out.println(String.format("%-4s", month + ".") +"\t" + formattedBalance);
+        }
+    }
+
+    public void displayMonthlyPayment() {
+        double monthlyPayment = calculator.calculateMonthlyPayment();
         String monthlyPaymentString = NumberFormat.getCurrencyInstance(Locale.UK).format(monthlyPayment);
         System.out.println("Monthly payment");
         System.out.println("---------------");
         System.out.println(monthlyPaymentString + "\n");
     }
 
-    public static void displayPaymentSchedule(int principal, float annualInterest, byte years) {
-        System.out.println("Payment schedule");
-        System.out.println("----------------");
-        System.out.println("Month\tBalance");
-        for (short month = 1; month <= years * MONTHS_IN_YEAR; month++) {
-            double balance = MortgageCalculator.calculateBalance(principal, annualInterest, years, month);
-            String formattedBalance = NumberFormat.getCurrencyInstance(Locale.UK).format(balance);
-            System.out.println(String.format("%-4s", month + ".") +"\t" + formattedBalance);
-        }
-    }
 }
