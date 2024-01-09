@@ -1,7 +1,6 @@
 package mortgagerefactored;
 
 public class Main {
-    final static byte MONTHS_IN_YEAR = 12;
 
     public static void main(String[] args) {
         int principal = (int) Console.readNumber("Loan amount (£1000 - £1000,000): ", 1000, 1000_000);

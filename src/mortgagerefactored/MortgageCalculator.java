@@ -1,8 +1,8 @@
 package mortgagerefactored;
 
 public class MortgageCalculator {
-    final static byte MONTHS_IN_YEAR = 12;
-    final static byte PERCENT = 100;
+    public final static byte MONTHS_IN_YEAR = 12;
+    public final static byte PERCENT = 100;
 
     private int principal;
     private float annualInterest;
