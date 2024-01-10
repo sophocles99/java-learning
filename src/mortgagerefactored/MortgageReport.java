@@ -10,17 +10,6 @@ public class MortgageReport {
         this.calculator = calculator;
     }
 
-    public void displayPaymentSchedule() {
-        System.out.println("Payment schedule");
-        System.out.println("----------------");
-        System.out.println("Month\tBalance");
-        for (short month = 1; month <= calculator.getYears() * MortgageCalculator.MONTHS_IN_YEAR; month++) {
-            double balance = calculator.calculateBalance(month);
-            String formattedBalance = NumberFormat.getCurrencyInstance(Locale.UK).format(balance);
-            System.out.println(String.format("%-4s", month + ".") + "\t" + formattedBalance);
-        }
-    }
-
     public void displayMonthlyPayment() {
         double monthlyPayment = calculator.calculateMonthlyPayment();
         String monthlyPaymentString = NumberFormat.getCurrencyInstance(Locale.UK).format(monthlyPayment);
@@ -29,4 +18,10 @@ public class MortgageReport {
         System.out.println(monthlyPaymentString + "\n");
     }
 
+    public void displayPaymentSchedule() {
+        System.out.println("Payment schedule");
+        System.out.println("----------------");
+        for (double balance : calculator.getRemainingBalances())
+            System.out.println(NumberFormat.getCurrencyInstance(Locale.UK).format(balance));
+    }
 }
