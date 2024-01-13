@@ -5,7 +5,6 @@ public class TextBox extends UIControl {
 
     public TextBox() {
         super(false);
-        System.out.println("TextBox");
     }
 
     @Override
