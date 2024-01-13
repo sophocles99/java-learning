@@ -3,8 +3,14 @@ package inheritance;
 public class TextBox extends UIControl {
     private String text = "";
 
-    public TextBox() {
-        super(false);
+//    public TextBox() {
+//        super(false);
+//    }
+
+
+    @Override
+    public void render() {
+        System.out.println("Render TextBox");
     }
 
     @Override
