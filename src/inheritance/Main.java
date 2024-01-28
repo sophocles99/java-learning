@@ -6,5 +6,8 @@ public class Main {
         var calculator = new TaxCalculator2024(100_000);
         var report = new TaxReport(calculator);
         report.show();
+
+        report.setCalculator(new TaxCalculator2025());
+        report.show();
     }
 }
