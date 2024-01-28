@@ -1,10 +1,10 @@
 package inheritance;
 
 public class TaxReport {
-    private TaxCalculator2024 calculator;
+    private TaxCalculator calculator;
 
-    public TaxReport() {
-        calculator = new TaxCalculator2024(100_000);
+    public TaxReport(TaxCalculator calculator) {
+        this.calculator = calculator;
     }
 
     public void show() {
